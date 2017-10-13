@@ -59,7 +59,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->product->find($id);
+        if(!$product)
+            return response()->json(['error' => 'not_found']);
+
+        return response()->json(['data' => $product]);
     }
 
     /**
