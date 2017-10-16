@@ -1,10 +1,16 @@
 <?php
 
-$this->post('products/search', 'API\ProductController@search');
+$this->group(['middleware' => 'jwt.auth'], function(){
 
-$this->resource('products', 'API\ProductController', [
-    'except' => [
-        'create', 
-        'edit'
-    ]
-]);
+    $this->post('products/search', 'API\ProductController@search');
+    
+    $this->resource('products', 'API\ProductController', [
+        'except' => [
+            'create', 
+            'edit'
+        ]
+    ]);
+
+});
+
+
